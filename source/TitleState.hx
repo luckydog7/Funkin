@@ -1,9 +1,5 @@
 package;
 
-#if desktop
-import Discord.DiscordClient;
-import sys.thread.Thread;
-#end
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
@@ -24,13 +20,10 @@ import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
-#if newgrounds
-import io.newgrounds.NG;
-#end
+//import io.newgrounds.NG;
 import lime.app.Application;
 import openfl.Assets;
-import utils.AndroidData;
-import flixel.math.FlxMath;
+import lime.system.System;
 
 using StringTools;
 
@@ -43,8 +36,6 @@ class TitleState extends MusicBeatState
 	var credTextShit:Alphabet;
 	var textGroup:FlxGroup;
 	var ngSpr:FlxSprite;
-	var defaultCamZoom:Float = 1;
-	var data:AndroidData = new AndroidData();
 
 	var curWacky:Array<String> = [];
 
@@ -59,7 +50,7 @@ class TitleState extends MusicBeatState
 		#if polymod
 		polymod.Polymod.init({modRoot: "mods", dirs: ['introMod']});
 		#end
-
+		
 		PlayerSettings.init();
 
 		curWacky = FlxG.random.getObject(getIntroTextShit());
@@ -68,9 +59,7 @@ class TitleState extends MusicBeatState
 
 		super.create();
 
-		#if newgrounds
-		NGio.noLogin(APIStuff.API);
-		#end
+		//NGio.noLogin(APIStuff.API);
 
 		#if ng
 		var ng:NGio = new NGio(APIStuff.API, APIStuff.EncKey);
@@ -80,7 +69,6 @@ class TitleState extends MusicBeatState
 		FlxG.save.bind('funkin', 'ninjamuffin99');
 
 		Highscore.load();
-		data.startData();
 
 		if (FlxG.save.data.weekUnlocked != null)
 		{
@@ -105,14 +93,6 @@ class TitleState extends MusicBeatState
 		{
 			startIntro();
 		});
-		#end
-
-		#if desktop
-		DiscordClient.initialize();
-		
-		Application.current.onExit.add (function (exitCode) {
-			DiscordClient.shutdown();
-		 });
 		#end
 	}
 
@@ -158,18 +138,17 @@ class TitleState extends MusicBeatState
 		// bg.setGraphicSize(Std.int(bg.width * 0.6));
 		// bg.updateHitbox();
 		add(bg);
-//-150, 100 <- original x and y
+
 		logoBl = new FlxSprite(-150, -100);
 		logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
 		logoBl.antialiasing = true;
 		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24);
 		logoBl.animation.play('bump');
-		//logoBl.scale.set(0.7, 0.7);//yrses
 		logoBl.updateHitbox();
 		// logoBl.screenCenter();
 		// logoBl.color = FlxColor.BLACK;
 
-		gfDance = new FlxSprite(FlxG.width * 0.4, FlxG.height * 0.07);
+		gfDance = new FlxSprite(150, 100);
 		gfDance.frames = Paths.getSparrowAtlas('gfDanceTitle');
 		gfDance.animation.addByIndices('danceLeft', 'gfDance', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
 		gfDance.animation.addByIndices('danceRight', 'gfDance', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
@@ -259,7 +238,7 @@ class TitleState extends MusicBeatState
 
 		var pressedEnter:Bool = FlxG.keys.justPressed.ENTER;
 
-		//#if mobile removed because it bugs higher-android phones.
+		#if mobile
 		for (touch in FlxG.touches.list)
 		{
 			if (touch.justPressed)
@@ -267,7 +246,15 @@ class TitleState extends MusicBeatState
 				pressedEnter = true;
 			}
 		}
-		//#end
+		#end
+
+		// delete this later
+		#if web
+		if (FlxG.mouse.justPressed)
+		{
+			pressedEnter = true;
+		}
+		#end
 
 		var gamepad:FlxGamepad = FlxG.gamepads.lastActive;
 
@@ -284,7 +271,7 @@ class TitleState extends MusicBeatState
 
 		if (pressedEnter && !transitioning && skippedIntro)
 		{
-			#if newgrounds
+			/*
 			#if !switch
 			NGio.unlockMedal(60960);
 
@@ -292,8 +279,7 @@ class TitleState extends MusicBeatState
 			if (Date.now().getDay() == 5)
 				NGio.unlockMedal(61034);
 			#end
-			#end
-
+			*/
 			titleText.animation.play('press');
 
 			FlxG.camera.flash(FlxColor.WHITE, 1);
@@ -305,25 +291,22 @@ class TitleState extends MusicBeatState
 			new FlxTimer().start(2, function(tmr:FlxTimer)
 			{
 				// Check if version is outdated
-				#if newgrounds
-				var version:String = "v" + Application.current.meta.get('version');
 
-				if (version.trim() != NGio.GAME_VER_NUMS.trim() && !OutdatedSubState.leftState && APIStuff.API != "")
+				var version:String = "v" + Application.current.meta.get('version');
+				//version.trim() != NGio.GAME_VER_NUMS.trim() 
+				if (false && !OutdatedSubState.leftState)
 				{
-					FlxG.switchState(new OutdatedSubState());
 					trace('OLD VERSION!');
 					trace('old ver');
 					trace(version.trim());
 					trace('cur ver');
-					trace(NGio.GAME_VER_NUMS.trim());
+					//trace(NGio.GAME_VER_NUMS.trim());
+					FlxG.switchState(new OutdatedSubState());
 				}
 				else
 				{
 					FlxG.switchState(new MainMenuState());
 				}
-				#else
-				FlxG.switchState(new MainMenuState());
-				#end
 			});
 			// FlxG.sound.play(Paths.music('titleShoot'), 0.7);
 		}
@@ -333,8 +316,14 @@ class TitleState extends MusicBeatState
 			skipIntro();
 		}
 
+		#if android
+		if (FlxG.android.justReleased.BACK)
+			{
+				System.exit(0);
+			}
+		#end
+
 		super.update(elapsed);
-		FlxG.camera.zoom = FlxMath.lerp(defaultCamZoom, FlxG.camera.zoom, 0.95);
 	}
 
 	function createCoolText(textArray:Array<String>)
@@ -370,7 +359,6 @@ class TitleState extends MusicBeatState
 	override function beatHit()
 	{
 		super.beatHit();
-		FlxG.camera.zoom += 0.015;
 
 		logoBl.animation.play('bump');
 		danceLeft = !danceLeft;
@@ -381,7 +369,6 @@ class TitleState extends MusicBeatState
 			gfDance.animation.play('danceLeft');
 
 		FlxG.log.add(curBeat);
-		var lite:Bool = FlxG.random.bool(20);//easter egg.
 
 		switch (curBeat)
 		{
@@ -422,28 +409,13 @@ class TitleState extends MusicBeatState
 			// credTextShit.text = "Friday";
 			// credTextShit.screenCenter();
 			case 13:
-				if (lite){
-				    addMoreText('FNF LITE');
-				}
-				else{
-			    	addMoreText('Friday');
-				}
+				addMoreText('Friday');
 			// credTextShit.visible = true;
 			case 14:
-				if (lite){
-				    addMoreText('DEV');
-				}
-				else{
-				    addMoreText('Night');
-				}
+				addMoreText('Night');
 			// credTextShit.text += '\nNight';
 			case 15:
-				if (lite){
-				    addMoreText('IS SHIT');
-				}
-				else{
-			    	addMoreText('Funkin\nAndroid');
-				}
+				addMoreText('Funkin'); // credTextShit.text += '\nFunkin';
 
 			case 16:
 				skipIntro();

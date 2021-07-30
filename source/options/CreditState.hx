@@ -29,12 +29,12 @@ class CreditState extends MusicBeatState{
 	private var iconArray:Array<CreditIcon> = [];
 	override function create()
 	{
-	    addWeek(['FNF Android Creator', 'V2.8 Coder'], 1, ['lucky', 'zack']);
+	    addWeek(['Creador de FNF android', 'Codificador de V2.8'], 1, ['lucky', 'zack']);
 	    addWeek(['BetaTester1', 'BetaTester2'], 2, ['schepka', 'goldie']);
-	    addWeek(['Icon Artist', 'Icon Set 2'], 3, ['idioticlucas', 'maskedpump']);
-	    addWeek(['GF Animator', 'Freeplay Bumpin'], 4, ['mark', 'smokey']);
-	    addWeek(['Builder', 'Save help + builder', 'NoteSplash + tankroll'], 5, ['peppy', 'klavier', 'gamerbros']);
-	    addWeek(['Funkin Crew', 'Funkin Crew', 'Funkin Crew', 'Funkin Crew'], 6, ['muffin', 'phantom', 'kawaii', 'evil']);
+	    addWeek(['Artista de iconos', 'Conjunto de iconos 2'], 3, ['idioticlucas', 'maskedpump']);
+	    addWeek(['Animador de GF', 'Choque del Freeplay'], 4, ['mark', 'smokey']);
+	    addWeek(['Constructor', 'Ayuda de guardado + constructor', 'Chapoteo de nota + rollo de tanque'], 5, ['peppy', 'klavier', 'gamerbros']);
+	    addWeek(['Miembro de Funkin', 'Miembro de Funkin', 'Miembro de Funkin', 'Miembro de Funkin'], 6, ['muffin', 'phantom', 'kawaii', 'evil']);
 
 		// LOAD MUSIC
 

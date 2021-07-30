@@ -59,7 +59,7 @@ class FreeplayState extends MusicBeatState
 
 		#if desktop
 		// Updating Discord Rich Presence
-		DiscordClient.changePresence("In the Menus", null);
+		DiscordClient.changePresence("En los menús", null);
 		#end
 
 		var isDebug:Bool = false;
@@ -218,7 +218,7 @@ class FreeplayState extends MusicBeatState
 		if (Math.abs(lerpScore - intendedScore) <= 10)
 			lerpScore = intendedScore;
 
-		scoreText.text = "PERSONAL BEST:" + lerpScore;
+		scoreText.text = "MEJOR PERSONAL:" + lerpScore;
 
 		switch (songs[curSelected].songName.toLowerCase())
 		{
@@ -305,11 +305,11 @@ class FreeplayState extends MusicBeatState
 		switch (curDifficulty)
 		{
 			case 0:
-				diffText.text = "< EASY >";
+				diffText.text = "< FACIL >";
 			case 1:
 				diffText.text = '< NORMAL >';
 			case 2:
-				diffText.text = "< HARD >";
+				diffText.text = "< DIFICIL >";
 		}
 	}
 	override function beatHit()
@@ -325,7 +325,7 @@ class FreeplayState extends MusicBeatState
 				}
 			else if (FlxG.camera.zoom < 1.35 && songs[curSelected].songName.toLowerCase() != 'milf'){
 				FlxG.camera.zoom += 0.020;
-				trace('beat!');
+				trace('ritmo!');
 			}
 			//Sum extra detail
 			if (FlxG.camera.zoom < 1.35 && songs[curSelected].songName.toLowerCase() == 'milf' && curBeat >= 168 && curBeat < 200)

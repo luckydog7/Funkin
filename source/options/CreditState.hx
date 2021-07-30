@@ -34,7 +34,7 @@ class CreditState extends MusicBeatState{
 	    addWeek(['Artista de iconos', 'Conjunto de iconos 2'], 3, ['idioticlucas', 'maskedpump']);
 	    addWeek(['Animador de GF', 'Choque del Freeplay'], 4, ['mark', 'smokey']);
 	    addWeek(['Constructor', 'Ayuda de guardado + constructor', 'Chapoteo de nota + rollo de tanque'], 5, ['peppy', 'klavier', 'gamerbros']);
-	    addWeek(['Miembro de Funkin', 'Miembro de Funkin', 'Miembro de Funkin', 'Miembro de Funkin'], 6, ['muffin', 'phantom', 'kawaii', 'evil']);
+	    addWeek(['Miembro Funkin', 'Miembro Funkin', 'Miembro Funkin', 'Miembro Funkin'], 6, ['muffin', 'phantom', 'kawaii', 'evil']);
 
 		// LOAD MUSIC
 

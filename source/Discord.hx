@@ -16,13 +16,13 @@ class DiscordClient
 			onError: onError,
 			onDisconnected: onDisconnected
 		});
-		trace("Discord Client started.");
+		trace("Cliente de Discord iniciado.");
 
 		while (true)
 		{
 			DiscordRpc.process();
 			sleep(2);
-			//trace("Discord Client Update");
+			//trace("Actualizacion del cliente de Discord");
 		}
 
 		DiscordRpc.shutdown();
@@ -36,7 +36,7 @@ class DiscordClient
 	static function onReady()
 	{
 		DiscordRpc.presence({
-			details: "In the Menus",
+			details: "En los menús",
 			state: null,
 			largeImageKey: 'icon',
 			largeImageText: "Friday Night Funkin'"

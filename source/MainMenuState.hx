@@ -39,6 +39,8 @@ class MainMenuState extends MusicBeatState
 	var camFollow:FlxObject;
 	public var bg:FlxSprite;
 	public var menuItem:FlxSprite;
+	public static var funkVer:string = "0.2.8";
+	public static var funkBuild:string = "2";
 	var data:AndroidData = new AndroidData();
 
 	override function create()
@@ -109,7 +111,7 @@ class MainMenuState extends MusicBeatState
 
 		FlxG.camera.follow(camFollow, null, 0.06);
 
-		var versionShit:FlxText = new FlxText(5, FlxG.height - 18, 0, "v" + Application.current.meta.get('version') + " " + Assets.getText("assets/android/aboutmod.txt"), 12);
+		var versionShit:FlxText = new FlxText(12, FlxG.height - 44, 0, "Fnf Mobile V" + funkVer, 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);

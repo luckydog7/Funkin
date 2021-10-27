@@ -314,47 +314,60 @@ class TitleState extends MusicBeatState
 
 			new FlxTimer().start(2, function(tmr:FlxTimer)
 			{
-				// Check if version is outdated
-				#if newgrounds
-				// var version:String = "v" + Application.current.meta.get('version');
+									// Get current version of funkin mobile
 
-				// if (version.trim() != NGio.GAME_VER_NUMS.trim() && !OutdatedSubState.leftState && APIStuff.API != "")
-				// {
-				// 	FlxG.switchState(new OutdatedSubState());
-				// 	trace('OLD VERSION!');
-				// 	trace('old ver');
-				// 	trace(version.trim());
-				// 	trace('cur ver');
-				// 	trace(NGio.GAME_VER_NUMS.trim());
-				// }
-				// else
-				// {
-				// 	FlxG.switchState(new MainMenuState());
-				// }
-				// #else
-				var http = new Http('https://raw.githubusercontent.com/luckydog7/Funkin-android/master/version.json');
+				var http = new haxe.Http("https://raw.githubusercontent.com/luckydog7/Funkin-Android/Master/Version.txt");
 
-				http.onError = _ -> FlxG.switchState(new MainMenuState());
-				http.onData = (data:String) ->
-				{
-					var build:Null<Float> = Json.parse(data).build;
-
-					if (build != null)
-						if (build == utils.Version.get().build)
-							FlxG.switchState(new MainMenuState());
-						else
-							FlxG.switchState(new OutdatedSubState(build));
-				}
-				if (FlxG.save.data.dontaskupdate != null)
-					if (FlxG.save.data.dontaskupdate)
-						http.onError('')
+				http.onData = function (data:String) {
+				  
+				  	if (!MainMenuState.funkVer.contains(data.trim()) && !OutdatedSubState.leftState)
+					{
+						trace('outdated lmao! ' + data.trim() + ' != ' + MainMenuState.funkVer);
+						OutdatedSubState.needVer = data;
+						FlxG.switchState(new OutdatedSubState());
+					}					
 					else
-						http.request();
-				else
-					http.request();
-				#end
+					{
+						FlxG.switchState(new MainMenuState());
+					}
+				}
+				
+				http.onError = function (error) {
+				  trace('error: $error');
+				  FlxG.switchState(new MainMenuState()); // fail but we go anyway
+				}
+				
+				http.request();
+				// get current build of funkin mobile
+
 			});
 			// FlxG.sound.play(Paths.music('titleShoot'), 0.7);
+			
+							var http = new haxe.Http("https://raw.githubusercontent.com/luckydog7/Funkin-Android/Master/Build.txt");
+
+				http.onData = function (data:String) {
+				  
+				  	if (!MainMenuState.funkBuild.contains(data.trim()) && !OutdatedSubState.leftState)
+					{
+						trace('outdated lmao! ' + data.trim() + ' != ' + MainMenuState.funkBuild);
+						OutdatedSubState.needbuild = data;
+						FlxG.switchState(new OutdatedSubState());
+					}					
+					else
+					{
+						FlxG.switchState(new MainMenuState());
+					}
+				}
+				
+				http.onError = function (error) {
+				  trace('error: $error');
+				  FlxG.switchState(new MainMenuState()); // fail but we go anyway
+				}
+				
+				http.request();
+
+			});
+
 		}
 
 		if (pressedEnter && !skippedIntro)

@@ -90,10 +90,13 @@ class OutdatedSubState extends MusicBeatState
 		add(downloadButton);
 		// var ver = "v" + Application.current.meta.get('version');
 		// var txt:FlxText = new FlxText(0, 0, FlxG.width,
-		// 	"HEY! You're running an outdated version of the game!\nCurrent version is "
-		// 	+ ver
+		// 	"HEY! You're running an outdated version of Funkin-Android!\nCurrent version is "
+		// 	+ funkver
+		//      + "and build is"
+		//      + funkBuild
 		// 	+ " while the most recent version is "
-		// 	// + NGio.GAME_VER
+		// 	// + needVer
+		//      // + needBuild
 		// 	+ "! Press Space to go to itch.io, or ESCAPE to ignore this!!",
 		// 	32);
 		// txt.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER);
@@ -113,7 +116,7 @@ class OutdatedSubState extends MusicBeatState
 	// {
 	// 	if (controls.ACCEPT)
 	// 	{
-	// 		FlxG.openURL("https://ninja-muffin24.itch.io/funkin");
+	// 		FlxG.openURL("https://github.com/luckydog7/Funkin-android/releases");
 	// 	}
 	// 	if (controls.BACK)
 	// 	{

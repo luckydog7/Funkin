@@ -339,6 +339,7 @@ class TitleState extends MusicBeatState
 				
 				http.request();
 				// get current build of funkin mobile
+                                else
 
 			});
 			// FlxG.sound.play(Paths.music('titleShoot'), 0.7);

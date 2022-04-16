@@ -100,8 +100,9 @@ class MainMenuState extends MusicBeatState
 			menuItem.animation.addByPrefix('idle', optionShit[i] + " idle", 24);
 			menuItem.animation.addByPrefix('selected', optionShit[i] + " selected", 24);
 			menuItem.animation.play('idle');
+			menuItem.setGraphicSize(Std.int(menuItem.width * 1.1));
 			menuItem.ID = i;
-			menuItem.screenCenter(X);
+			menuItem.x += 100
 			menuItems.add(menuItem);
 			menuItem.scrollFactor.set();
 			menuItem.antialiasing = true;
@@ -228,7 +229,7 @@ class MainMenuState extends MusicBeatState
 
 		menuItems.forEach(function(spr:FlxSprite)
 		{
-			spr.screenCenter(X);
+			
 		});
 	}
 

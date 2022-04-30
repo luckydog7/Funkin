@@ -234,7 +234,7 @@ class Character extends FlxSprite
 				flipX = true;
 
 			loadOffsetFile(curCharacter);
-				barColor = 0xFFf3ff6e;
+				barColor = 0xFFFFFFFF;
 				playAnim('idle');
 			case 'buster':
 				tex = Paths.getSparrowAtlas('t_buster', 'shared', true);

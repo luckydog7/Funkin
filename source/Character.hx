@@ -233,6 +233,33 @@ class Character extends FlxSprite
 
 				flipX = true;
 
+			loadOffsetFile(curCharacter);
+				barColor = 0xFFFFFFFF;
+				playAnim('idle');
+			case 'buster':
+				tex = Paths.getSparrowAtlas('t_buster', 'shared', true);
+				frames = tex;
+				animation.addByPrefix('idle', "Buster Idle Dance", 24, false);
+				animation.addByPrefix('singUP', 'Buster Up note0', 24, false);
+				animation.addByPrefix('singDOWN', 'Buster Down Note0', 24, false);
+				if (isPlayer)
+				{
+					animation.addByPrefix('singLEFT', 'Buster NOTE LEFT0', 24, false);
+					animation.addByPrefix('singRIGHT', 'Buster Note Right0', 24, false);
+					animation.addByPrefix('singRIGHTmiss', 'Buster Note Right Miss', 24, false);
+					animation.addByPrefix('singLEFTmiss', 'Buster NOTE LEFT miss', 24, false);
+				}
+				else
+				{
+					// Need to be flipped! REDO THIS LATER!
+					animation.addByPrefix('singLEFT', 'Buster Note Right0', 24, false);
+					animation.addByPrefix('singRIGHT', 'Buster NOTE LEFT0', 24, false);
+					animation.addByPrefix('singRIGHTmiss', 'Buster NOTE LEFT miss', 24, false);
+					animation.addByPrefix('singLEFTmiss', 'Buster Note Right Miss', 24, false);
+				}
+
+				animation.addByPrefix('singUPmiss', 'Buster Up note miss', 24);
+				animation.addByPrefix('singDOWNmiss', 'Buster Down Note MISS', 24);
 			case 'bf-christmas':
 				var tex = Paths.getSparrowAtlas('bfChristmas', 'shared', true);
 				frames = tex;

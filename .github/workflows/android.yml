@@ -71,6 +71,7 @@ jobs:
           haxelib git linc_luajit https://github.com/MasterEric/linc_luajit.git --quiet
           haxelib git hxvm-luajit https://github.com/nebulazorua/hxvm-luajit.git --quiet
           haxelib install actuate 
+          haxelib install newgrounds --quiet
           haxelib list
           
       - name: funni build logs
